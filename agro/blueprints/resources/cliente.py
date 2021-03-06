@@ -4,24 +4,24 @@ from flask import request
 from flask_restplus import Resource
 from agro.utils.response import AgroResponse
 
-from agro.blueprints.services.agricultor import AgricultorService
+from agro.blueprints.services.cliente import ClienteService
 
-class AgricultorResource(Resource):
+class ClienteResource(Resource):
     def get(self):
         agro_response = AgroResponse()
-        agricultor = AgricultorService()
+        cliente = ClienteService()
 
-        retorno = agricultor.listar()
+        retorno = cliente.listar()
         if retorno:
             return agro_response.status_200(retorno)
         return agro_response.status_400('deu', 'ruim')
 
     def post(self):
         agro_response = AgroResponse()
-        agricultor = AgricultorService()
+        cliente = ClienteService()
         dados = json.loads(request.data)
 
-        retorno = agricultor.criar(dados)
+        retorno = cliente.criar(dados)
         if retorno:
-            return agro_response.status_200('criado fdp')
+            return agro_response.status_200('Criado com sucesso')
         return agro_response.status_400('deu', 'ruim')

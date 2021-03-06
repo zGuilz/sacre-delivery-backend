@@ -10,4 +10,5 @@ def minimal_app(**config):
 def create_app(**config):
     app = minimal_app(**config)
     configuration.load_extensions(app)
+    from agro import models
     return app

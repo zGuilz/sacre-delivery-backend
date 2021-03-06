@@ -1,9 +1,14 @@
 [default]
-DEBUG = false
-SQLALCHEMY_DATABASE_URI = 'sqlite:///development.db'
+DEBUG = true
+SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = false
 TITLE = 'Agro +'
+APP_NAME = 'Agro +'
 EXTENSIONS = [
   "agro.ext.database:init_app",
   "agro.blueprints:init_app"
 ]
+
+[development]
+EXTENSIONS = ["dynaconf_merge_unique"]
+DEBUG = true
