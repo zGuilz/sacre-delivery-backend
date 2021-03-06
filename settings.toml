@@ -1,0 +1,9 @@
+[default]
+DEBUG = false
+SQLALCHEMY_DATABASE_URI = 'sqlite:///development.db'
+SQLALCHEMY_TRACK_MODIFICATIONS = false
+TITLE = 'Agro +'
+EXTENSIONS = [
+  "agro.ext.database:init_app",
+  "agro.blueprints:init_app"
+]
