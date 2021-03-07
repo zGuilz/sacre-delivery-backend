@@ -7,6 +7,7 @@ from flask_restplus import Api
 from agro.blueprints.resources.healthcheck import HealthCheckResource
 from agro.blueprints.resources.agricultor import AgricultorResource
 from agro.blueprints.resources.cliente import ClienteResource
+from agro.blueprints.resources.produto import ProdutoResource
 from agro.utils.response import AgroResponse
 
 BASE_PATH = '/api'
@@ -24,6 +25,8 @@ def init_app(app):
     api.add_resource(HealthCheckResource, f'{BASE_PATH}/health', methods=['GET'])
     api.add_resource(AgricultorResource, f'{BASE_PATH}/agricultor', methods=['GET', 'POST'])
     api.add_resource(ClienteResource, f'{BASE_PATH}/cliente', methods=['GET', 'POST'])
+    api.add_resource(ProdutoResource, f'{BASE_PATH}/produto', methods=['GET', 'POST', 'PUT'])
+    api.add_resource(ProdutoResource, f'{BASE_PATH}/produto/<string:id>', methods=['DELETE'])
 
     @api.errorhandler(NotFound)
     def page_not_found_error(error):

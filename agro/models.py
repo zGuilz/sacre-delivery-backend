@@ -46,6 +46,7 @@ class Produto(db.Model, SerializerMixin):
     quantidade = db.Column(db.Integer, nullable=False)
     categoria_id = db.Column(db.Integer, db.ForeignKey("categoria.id"), nullable=False)
     agricultor_id = db.Column(db.Integer, db.ForeignKey("agricultor.id"), nullable=False)
+    serialize_rules = ('-categoria.categoria', '-agricultor.agricultor')
 
     categoria = db.relationship("Categoria", backref="categoria")
     agricultor = db.relationship("Agricultor", backref="agricultor")
