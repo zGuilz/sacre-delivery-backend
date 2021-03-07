@@ -21,6 +21,10 @@ class AgroResponse():
     def status_200(self, dados):
         self.response['dados'] = dados
         return self.response, 200
+
+    def status_201(self, dados):
+        self.response['dados'] = dados
+        return self.response, 201
     
     def status_400(self, mensagem, detalhe):
             del self.response['txMensagem']
