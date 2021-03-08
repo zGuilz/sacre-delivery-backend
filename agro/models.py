@@ -66,7 +66,7 @@ class Pedido(db.Model, SerializerMixin):
     preco_total = db.Column(db.Float, nullable=False)
     data = db.Column(db.DateTime, nullable=False)
     forma_pagamento_id = db.Column(db.Integer, db.ForeignKey("forma_pagamento.id"), nullable=False)
-    serialize_rules = ('-formapagamento.formapagamento',)
+    serialize_rules = ('-forma_pagamento.formapagamento',)
 
     forma_pagamento = db.relationship("FormaPagamento", backref="formapagamento")
 
@@ -76,6 +76,7 @@ class ItemVenda(db.Model, SerializerMixin):
     preco_por_item = db.Column(db.Float, nullable=False)
     produto_id = db.Column(db.Integer, db.ForeignKey("produto.id"), nullable=False)
     pedido_id = db.Column(db.Integer, db.ForeignKey("pedido.id"), nullable=False)
+    serialize_rules = ('-produto.produto', '-pedido.pedido')
 
     produto = db.relationship("Produto", backref="produto")
     pedido = db.relationship("Pedido", backref="pedido")

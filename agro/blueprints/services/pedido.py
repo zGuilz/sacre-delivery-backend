@@ -13,7 +13,7 @@ class PedidoService():
     @staticmethod
     def listar():
         pedidos = Pedido.query.all()
-        return {"pedidos": [pedido.to_dict(rules=("-pedido", "-pedido")) for pedido in pedidos]}
+        return {"pedidos": [pedido.to_dict(rules=('-pedido', '-pedido')) for pedido in pedidos]}
 
     @staticmethod
     def deletar(id):
