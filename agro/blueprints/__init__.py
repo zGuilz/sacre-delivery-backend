@@ -24,7 +24,9 @@ def init_app(app):
 
     api.add_resource(HealthCheckResource, f'{BASE_PATH}/health', methods=['GET'])
     api.add_resource(AgricultorResource, f'{BASE_PATH}/agricultor', methods=['GET', 'POST'])
+    api.add_resource(AgricultorResource, f'{BASE_PATH}/agricultor/<string:id>', methods=['PUT', 'DELETE'])
     api.add_resource(ClienteResource, f'{BASE_PATH}/cliente', methods=['GET', 'POST'])
+    api.add_resource(ClienteResource, f'{BASE_PATH}/cliente/<string:id>', methods=['PUT', 'DELETE'])
     api.add_resource(ProdutoResource, f'{BASE_PATH}/produto', methods=['GET', 'POST', 'PUT'])
     api.add_resource(ProdutoResource, f'{BASE_PATH}/produto/<string:id>', methods=['DELETE'])
 
