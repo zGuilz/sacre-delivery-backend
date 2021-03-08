@@ -15,6 +15,23 @@ class ClienteResource(Resource):
         if retorno:
             return agro_response.status_200(retorno)
         return agro_response.status_400('deu', 'ruim')
+    
+    def put(self, id):
+        agro_response = AgroResponse()
+        cliente = ClienteService()
+        dados = json.loads(request.data)
+
+        retorno = cliente.atualizar(id, dados)
+        if retorno:
+            return agro_response.status_200(retorno)
+    
+    def delete(self, id):
+        agro_response = AgroResponse()
+        cliente = ClienteService()
+
+        retorno = cliente.deletar(id)
+        if retorno:
+            return agro_response.status_200(retorno)
 
     def post(self):
         agro_response = AgroResponse()

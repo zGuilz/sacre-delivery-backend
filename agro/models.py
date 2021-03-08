@@ -1,18 +1,32 @@
+from datetime import datetime
 from agro.ext.database import db
 from sqlalchemy_serializer import SerializerMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Usuario(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     login = db.Column(db.String(20), nullable=False, unique=True)
-    senha = db.Column(db.String(255), nullable=False)
+    senha_hash = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
+    criado_em = db.Column(db.DateTime(), default=datetime.utcnow)
     type = db.Column(db.String(50))
 
     __mapper_args__ = {
         'polymorphic_identity': 'usuario',
         'polymorphic_on': type
     }
+
+    @property
+    def senha(self):
+        raise AttributeError('senha não é atributo legível')
+
+    @senha.setter
+    def senha(self, senha):
+        self.senha_hash = generate_password_hash(senha)
+    
+    def verifica_senha(self, senha):
+        return check_password_hash(self.senha_hash, senha)
 
 class Agricultor(Usuario, SerializerMixin):
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
