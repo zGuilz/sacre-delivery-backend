@@ -12,6 +12,7 @@ from agro.blueprints.resources.forma_pagamento import FormaPagamentoResource
 from agro.blueprints.resources.endereco import EnderecoResource
 from agro.blueprints.resources.item_venda import ItemVendaResource
 from agro.blueprints.resources.categoria import CategoriaResource
+from agro.blueprints.resources.produto import ProdutoResource
 from agro.utils.response import AgroResponse
 
 BASE_PATH = '/api'
@@ -39,6 +40,8 @@ def init_app(app):
     api.add_resource(ItemVendaResource, f'{BASE_PATH}/item-venda/<string:id>', methods=['DELETE'])
     api.add_resource(CategoriaResource, f'{BASE_PATH}/categoria', methods=['GET', 'POST', 'PUT'])
     api.add_resource(CategoriaResource, f'{BASE_PATH}/categoria/<string:id>', methods=['DELETE'])
+    api.add_resource(ProdutoResource, f'{BASE_PATH}/produto', methods=['GET', 'POST', 'PUT'])
+    api.add_resource(ProdutoResource, f'{BASE_PATH}/produto/<string:id>', methods=['DELETE'])
 
     @api.errorhandler(NotFound)
     def page_not_found_error(error):
