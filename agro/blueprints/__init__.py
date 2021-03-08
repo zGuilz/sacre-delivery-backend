@@ -7,6 +7,11 @@ from flask_restplus import Api
 from agro.blueprints.resources.healthcheck import HealthCheckResource
 from agro.blueprints.resources.agricultor import AgricultorResource
 from agro.blueprints.resources.cliente import ClienteResource
+from agro.blueprints.resources.pedido import PedidoResource
+from agro.blueprints.resources.forma_pagamento import FormaPagamentoResource
+from agro.blueprints.resources.endereco import EnderecoResource
+from agro.blueprints.resources.item_venda import ItemVendaResource
+from agro.blueprints.resources.categoria import CategoriaResource
 from agro.utils.response import AgroResponse
 
 BASE_PATH = '/api'
@@ -24,6 +29,16 @@ def init_app(app):
     api.add_resource(HealthCheckResource, f'{BASE_PATH}/health', methods=['GET'])
     api.add_resource(AgricultorResource, f'{BASE_PATH}/agricultor', methods=['GET', 'POST'])
     api.add_resource(ClienteResource, f'{BASE_PATH}/cliente', methods=['GET', 'POST'])
+    api.add_resource(PedidoResource, f'{BASE_PATH}/pedido', methods=['GET', 'POST', 'PUT'])
+    api.add_resource(PedidoResource, f'{BASE_PATH}/pedido/<string:id>', methods=['DELETE'])
+    api.add_resource(FormaPagamentoResource, f'{BASE_PATH}/forma-pagamento', methods=['GET', 'POST', 'PUT'])
+    api.add_resource(FormaPagamentoResource, f'{BASE_PATH}/forma-pagamento/<string:id>', methods=['DELETE'])
+    api.add_resource(EnderecoResource, f'{BASE_PATH}/endereco', methods=['GET', 'POST', 'PUT'])
+    api.add_resource(EnderecoResource, f'{BASE_PATH}/endereco/<string:id>', methods=['DELETE'])
+    api.add_resource(ItemVendaResource, f'{BASE_PATH}/item-venda', methods=['GET', 'POST', 'PUT'])
+    api.add_resource(ItemVendaResource, f'{BASE_PATH}/item-venda/<string:id>', methods=['DELETE'])
+    api.add_resource(CategoriaResource, f'{BASE_PATH}/categoria', methods=['GET', 'POST', 'PUT'])
+    api.add_resource(CategoriaResource, f'{BASE_PATH}/categoria/<string:id>', methods=['DELETE'])
 
     @api.errorhandler(NotFound)
     def page_not_found_error(error):
