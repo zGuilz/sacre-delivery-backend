@@ -7,6 +7,7 @@ from flask_restplus import Api
 from agro.blueprints.resources.healthcheck import HealthCheckResource
 from agro.blueprints.resources.agricultor import AgricultorResource
 from agro.blueprints.resources.cliente import ClienteResource
+from agro.blueprints.resources.login import LoginResource
 from agro.blueprints.resources.pedido import PedidoResource
 from agro.blueprints.resources.forma_pagamento import FormaPagamentoResource
 from agro.blueprints.resources.endereco import EnderecoResource
@@ -28,30 +29,40 @@ def init_app(app):
     )
 
     api.add_resource(HealthCheckResource, f'{BASE_PATH}/health', methods=['GET'])
+
     api.add_resource(AgricultorResource, f'{BASE_PATH}/agricultor', methods=['GET', 'POST'])
     api.add_resource(AgricultorResource, f'{BASE_PATH}/agricultor/<string:id>', methods=['PUT', 'DELETE'])
+
     api.add_resource(ClienteResource, f'{BASE_PATH}/cliente', methods=['GET', 'POST'])
+    api.add_resource(ClienteResource, f'{BASE_PATH}/cliente', methods=['PUT', 'DELETE'])
+
     api.add_resource(PedidoResource, f'{BASE_PATH}/pedido', methods=['GET', 'POST', 'PUT'])
     api.add_resource(PedidoResource, f'{BASE_PATH}/pedido/<string:id>', methods=['DELETE'])
+
     api.add_resource(FormaPagamentoResource, f'{BASE_PATH}/forma-pagamento', methods=['GET', 'POST', 'PUT'])
     api.add_resource(FormaPagamentoResource, f'{BASE_PATH}/forma-pagamento/<string:id>', methods=['DELETE'])
+
     api.add_resource(EnderecoResource, f'{BASE_PATH}/endereco', methods=['GET', 'POST', 'PUT'])
     api.add_resource(EnderecoResource, f'{BASE_PATH}/endereco/<string:id>', methods=['DELETE'])
+
     api.add_resource(ItemVendaResource, f'{BASE_PATH}/item-venda', methods=['GET', 'POST', 'PUT'])
     api.add_resource(ItemVendaResource, f'{BASE_PATH}/item-venda/<string:id>', methods=['DELETE'])
+
     api.add_resource(CategoriaResource, f'{BASE_PATH}/categoria', methods=['GET', 'POST', 'PUT'])
     api.add_resource(CategoriaResource, f'{BASE_PATH}/categoria/<string:id>', methods=['DELETE'])
-    api.add_resource(ClienteResource, f'{BASE_PATH}/cliente/<string:id>', methods=['PUT', 'DELETE'])
+
     api.add_resource(ProdutoResource, f'{BASE_PATH}/produto', methods=['GET', 'POST', 'PUT'])
     api.add_resource(ProdutoResource, f'{BASE_PATH}/produto/<string:id>', methods=['DELETE'])
 
+    api.add_resource(LoginResource, f'{BASE_PATH}/login', methods=['POST'])
+
     @api.errorhandler(NotFound)
     def page_not_found_error(error):
-        ultron_response = AgroResponse()
+        agro_response = AgroResponse()
         mensagem = 'Erro de parâmetro(s) inválido(s).'
         detalhe = [str(error)]
-        return ultron_response.status_400(mensagem, detalhe)
-    
+        return agro_response.status_400(mensagem, detalhe)
+
     @api.errorhandler(Exception)
     def default_error_handler(e: Exception):
         agro_response = AgroResponse()

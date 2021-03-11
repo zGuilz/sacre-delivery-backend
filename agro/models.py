@@ -9,7 +9,7 @@ class Usuario(db.Model, SerializerMixin):
     login = db.Column(db.String(20), nullable=False, unique=True)
     senha_hash = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
-    criado_em = db.Column(db.DateTime(), default=datetime.utcnow)
+    criado_em = db.Column(db.DateTime(), default=datetime.now)
     type = db.Column(db.String(50))
 
     __mapper_args__ = {
@@ -24,9 +24,10 @@ class Usuario(db.Model, SerializerMixin):
     @senha.setter
     def senha(self, senha):
         self.senha_hash = generate_password_hash(senha)
-    
+
     def verifica_senha(self, senha):
         return check_password_hash(self.senha_hash, senha)
+
 
 class Agricultor(Usuario, SerializerMixin):
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
