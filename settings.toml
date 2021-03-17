@@ -11,5 +11,8 @@ EXTENSIONS = [
 ]
 
 [development]
-EXTENSIONS = ["dynaconf_merge_unique"]
+EXTENSIONS = ["dynaconf_merge_unique"] # reusar a lista de extensão de [default]
 DEBUG = true
+
+[testing]
+SQLALCHEMY_DATABASE_URI = 'sqlite:///testing.db'
