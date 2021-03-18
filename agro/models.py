@@ -1,7 +1,11 @@
+from flask import current_app
+
 from datetime import datetime
 from agro.ext.database import db
 from sqlalchemy_serializer import SerializerMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from itsdangerous import URLSafeTimedSerializer
 
 class Usuario(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,6 +13,7 @@ class Usuario(db.Model, SerializerMixin):
     login = db.Column(db.String(20), nullable=False, unique=True)
     senha_hash = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
+    confirmado = db.Column(db.Boolean(), default=False, nullable=False)
     criado_em = db.Column(db.DateTime(), default=datetime.now)
     type = db.Column(db.String(50))
 
@@ -28,6 +33,23 @@ class Usuario(db.Model, SerializerMixin):
     def verifica_senha(self, senha):
         return check_password_hash(self.senha_hash, senha)
 
+    @staticmethod
+    def gerar_token_confirmacao(email):
+        serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+        return serializer.dumps(email, salt=current_app.config['SECURITY_PASSWORD_SALT'])
+    
+    @staticmethod
+    def confirmacao_token(token, expiration=3600):
+        serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+        try:
+            email = serializer.loads(
+                token,
+                salt=current_app.config['SECURITY_PASSWORD_SALT'],
+                max_age=expiration
+            )
+        except:
+            return False
+        return email
 
 class Agricultor(Usuario, SerializerMixin):
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)

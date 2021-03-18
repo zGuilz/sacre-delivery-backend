@@ -5,9 +5,21 @@ SQLALCHEMY_TRACK_MODIFICATIONS = false
 TITLE = 'Agro +'
 APP_NAME = 'Agro +'
 SECRET_KEY = 'uma-frase-secreta'
+SECURITY_PASSWORD_SALT = 'uma-chave-secreta'
+
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = false
+MAIL_USE_SSL = true
+MAIL_DEFAULT_SENDER = 'agro@agro.com'
+
+MAIL_USERNAME = 'agrotechplus2021@gmail.com'
+MAIL_PASSWORD = 'Agro@impacta'
+
 EXTENSIONS = [
   "agro.ext.database:init_app",
-  "agro.blueprints:init_app"
+  "agro.blueprints:init_app",
+  "agro.ext.email:init_app"
 ]
 
 [development]

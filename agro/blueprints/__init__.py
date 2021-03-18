@@ -14,6 +14,7 @@ from agro.blueprints.resources.endereco import EnderecoResource
 from agro.blueprints.resources.item_venda import ItemVendaResource
 from agro.blueprints.resources.categoria import CategoriaResource
 from agro.blueprints.resources.produto import ProdutoResource
+from agro.blueprints.resources.confirmacao import ConfirmacaoResource
 from agro.utils.response import AgroResponse
 
 BASE_PATH = '/api'
@@ -53,6 +54,8 @@ def init_app(app):
 
     api.add_resource(ProdutoResource, f'{BASE_PATH}/produto', methods=['GET', 'POST', 'PUT'])
     api.add_resource(ProdutoResource, f'{BASE_PATH}/produto/<string:id>', methods=['DELETE'])
+
+    api.add_resource(ConfirmacaoResource, f'{BASE_PATH}/confirmar/<string:token>', methods=['GET'])
 
     api.add_resource(LoginResource, f'{BASE_PATH}/login', methods=['POST'])
 

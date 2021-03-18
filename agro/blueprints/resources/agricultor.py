@@ -40,5 +40,5 @@ class AgricultorResource(Resource):
 
         retorno = agricultor.criar(dados)
         if retorno:
-            return agro_response.status_200(retorno)
+            return agro_response.status_200('Um e-mail de confirmação foi enviado pra você')
         return agro_response.status_400('deu', 'ruim')

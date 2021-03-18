@@ -1,5 +1,8 @@
+from flask import url_for, render_template, request
+
 from agro.models import Agricultor
 from agro.ext.database import db
+from agro.utils.envio_email import enviar_email
 
 class AgricultorService():
     @staticmethod
@@ -7,7 +10,11 @@ class AgricultorService():
         agricultor = Agricultor(**dados)
         db.session.add(agricultor)
         db.session.commit()
-        db.session.close()
+
+        # token = agricultor.gerar_token_confirmacao(agricultor.email)
+        descricao = 'Seja bem-vindo'
+        html = render_template('confirmacao.html')
+        enviar_email(agricultor.email, descricao, html)
         return True
     
     @staticmethod
