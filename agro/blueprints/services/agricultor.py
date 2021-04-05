@@ -11,9 +11,10 @@ class AgricultorService():
         db.session.add(agricultor)
         db.session.commit()
 
-        # token = agricultor.gerar_token_confirmacao(agricultor.email)
+        token = agricultor.gerar_token_confirmacao(agricultor.email)
+        confirmar_url = request.host_url + "api/confirmar/" + token
+        html = render_template('confirmacao.html', confirmar_url=confirmar_url)
         descricao = 'Seja bem-vindo'
-        html = render_template('confirmacao.html')
         enviar_email(agricultor.email, descricao, html)
         return True
     

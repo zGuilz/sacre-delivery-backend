@@ -16,7 +16,7 @@ class ConfirmacaoResource(Resource):
             email = usuario.confirmacao_token(token)
         except:
             resposta = 'Link inválido ou expirado'
-        usuario = Usuario.query.filter_by(email=email)
+        usuario = Usuario.query.filter_by(email=email).first()
 
         if usuario.confirmado:
             resposta = 'Conta confirmada. Faça o login'
