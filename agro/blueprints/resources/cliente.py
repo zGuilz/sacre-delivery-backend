@@ -43,5 +43,5 @@ class ClienteResource(Resource):
 
         retorno = cliente.criar(dados)
         if retorno:
-            return agro_response.status_200('Criado com sucesso')
+            return agro_response.status_200('Um e-mail de confirmação foi enviado pra você')
         return agro_response.status_400('deu', 'ruim')

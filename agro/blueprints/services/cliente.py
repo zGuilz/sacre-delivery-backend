@@ -1,5 +1,9 @@
+from flask import url_for, render_template, request
+
 from agro.models import Cliente
 from agro.ext.database import db
+
+from agro.utils.envio_email import enviar_email
 
 class ClienteService():
     @staticmethod
@@ -8,6 +12,12 @@ class ClienteService():
         try:
             db.session.add(cliente)
             db.session.commit()
+
+            token = cliente.gerar_token_confirmacao(cliente.email)
+            confirmar_url = request.host_url + "api/confirmar/" + token
+            html = render_template('confirmacao.html', confirmar_url=confirmar_url)
+            descricao = 'Seja bem-vindo'
+            enviar_email(cliente.email, descricao, html)
             return True
         finally:
             db.session.close()
