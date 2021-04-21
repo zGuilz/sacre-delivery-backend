@@ -10,12 +10,19 @@ from itsdangerous import URLSafeTimedSerializer
 class Usuario(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
+    sobrenome = db.Column(db.String(100), nullable=False)
+    cpf = db.Column(db.String(100), nullable=False)
+    telefone = db.Column(db.String(100), nullable=False)
     login = db.Column(db.String(20), nullable=False, unique=True)
     senha_hash = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     confirmado = db.Column(db.Boolean(), default=False, nullable=False)
     criado_em = db.Column(db.DateTime(), default=datetime.now)
     type = db.Column(db.String(50))
+    endereco_id = db.Column(db.Integer, db.ForeignKey("endereco.id"))
+    serialize_rules = ('-endereco.endereco',)
+
+    endereco = db.relationship("Endereco", backref="endereco")
 
     __mapper_args__ = {
         'polymorphic_identity': 'usuario',
@@ -60,10 +67,6 @@ class Agricultor(Usuario, SerializerMixin):
 
 class Cliente(Usuario, SerializerMixin):
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
-    endereco_id = db.Column(db.Integer, db.ForeignKey("endereco.id"))
-    serialize_rules = ('-endereco.endereco',)
-
-    endereco = db.relationship("Endereco", backref="endereco")
 
     __mapper_args__ = {
         'polymorphic_identity': 'cliente'
@@ -101,7 +104,7 @@ class Pedido(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     numero = db.Column(db.Integer, nullable=False)
     preco_total = db.Column(db.Float, nullable=False)
-    data = db.Column(db.DateTime, nullable=False)
+    data = db.Column(db.DateTime, default=datetime.now)
     forma_pagamento_id = db.Column(db.Integer, db.ForeignKey("forma_pagamento.id"), nullable=False)
     serialize_rules = ('-formapagamento.formapagamento',)
 

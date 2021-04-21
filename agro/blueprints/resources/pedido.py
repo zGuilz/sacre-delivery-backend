@@ -3,6 +3,7 @@ import json
 from flask import request
 from flask_restplus import Resource
 from agro.utils.response import AgroResponse
+from agro.utils.authenticate import jwt_required
 
 from agro.blueprints.services.pedido import PedidoService
 
@@ -16,12 +17,13 @@ class PedidoResource(Resource):
             return agro_response.status_200(retorno)
         return agro_response.status_400("Não, encontrado")
 
-    def post(self):
+    @jwt_required
+    def post(self, current_user):
         agro_response = AgroResponse()
         pedido = PedidoService()
         dados = json.loads(request.data)
 
-        retorno = pedido.criar(dados)
+        retorno = pedido.criar(dados, current_user)
         if retorno:
             return agro_response.status_200("Pedido criado com sucesso!")
         return agro_response.status_400("Não, criado")
