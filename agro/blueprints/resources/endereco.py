@@ -3,6 +3,7 @@ import json
 from flask import request
 from flask_restplus import Resource
 from agro.utils.response import AgroResponse
+from agro.utils.authenticate import jwt_required
 
 from agro.blueprints.services.endereco import EnderecoService
 
@@ -17,6 +18,7 @@ class EnderecoResource(Resource):
             return agro_response.status_200(retorno)
         return agro_response.status_400("Não foi possível", "encontrar")
     
+    @jwt_required
     def post(self):
         agro_response = AgroResponse()
         endereco = EnderecoService()

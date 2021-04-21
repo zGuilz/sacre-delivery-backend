@@ -25,7 +25,7 @@ class PedidoResource(Resource):
 
         retorno = pedido.criar(dados, current_user)
         if retorno:
-            return agro_response.status_200("Pedido criado com sucesso!")
+            return agro_response.status_200(retorno)
         return agro_response.status_400("Não, criado")
 
     def delete(self, id):

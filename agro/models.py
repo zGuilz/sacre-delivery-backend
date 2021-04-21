@@ -46,7 +46,7 @@ class Usuario(db.Model, SerializerMixin):
         return serializer.dumps(email, salt=current_app.config['SECURITY_PASSWORD_SALT'])
     
     @staticmethod
-    def confirmacao_token(token, expiration=3600):
+    def confirmacao_token(token, expiration=60):
         serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
         try:
             email = serializer.loads(
@@ -54,7 +54,7 @@ class Usuario(db.Model, SerializerMixin):
                 salt=current_app.config['SECURITY_PASSWORD_SALT'],
                 max_age=expiration
             )
-        except:
+        except Exception:
             return False
         return email
 
@@ -77,7 +77,7 @@ class Endereco(db.Model, SerializerMixin):
     cep = db.Column(db.String(100), nullable=False)
     rua = db.Column(db.String(255), nullable=False)
     numero = db.Column(db.Integer, nullable=False)
-    casa = db.Column(db.String(100), nullable=False)
+    complemento = db.Column(db.String(100), nullable=True)
 
 class Produto(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)

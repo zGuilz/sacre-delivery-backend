@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from agro.models import Pedido
 from agro.ext.database import db
 from agro.utils.picpay import PicPay
@@ -6,26 +8,29 @@ class PedidoService():
     @staticmethod
     def criar(dados, current_user):
         picpay = PicPay()
-        # payment = picpay.payment(
-        #     reference_id=3,
-        #     callback_url="https://picpay.com/site",
-        #     return_url="http://www.sualoja.com.br/cliente/pedido/102030",
-        #     value=1.0,
-        #     expires_at="2022-05-01T16:00:00-03:00",
-        #     buyer={
-        #         "firstName": "João",
-        #         "lastName": "Da Silva",
-        #         "document": "123.456.789-10",
-        #         "email": "teste@picpay.com",
-        #         "phone": "+55 27 12345-6789",
-        #     },
-        # )
-        print(current_user)
         pedido = Pedido(**dados)
         db.session.add(pedido)
+        db.session.flush()
+
+        expiraca_em = (pedido.data.replace(microsecond=0) + timedelta(minutes=1)).isoformat() + "-03:00"
+
+        payment = picpay.payment(
+            reference_id=pedido.id,
+            callback_url="https://picpay.com/site",
+            return_url="http://www.sualoja.com.br/cliente/pedido/102030",
+            value=dados["preco_total"],
+            expires_at=expiraca_em,
+            buyer={
+                "firstName": current_user.nome,
+                "lastName": current_user.sobrenome,
+                "document": current_user.cpf,
+                "email": current_user.email,
+                "phone": current_user.telefone,
+            },
+        )
         db.session.commit()
         db.session.close()
-        return True
+        return payment
     
     @staticmethod
     def listar():

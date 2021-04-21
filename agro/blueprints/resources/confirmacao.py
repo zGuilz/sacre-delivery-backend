@@ -6,21 +6,23 @@ from agro.utils.response import AgroResponse
 from agro.ext.database import db
 from agro.models import Usuario
 
+from agro.utils.authenticate import jwt_required
+
 
 class ConfirmacaoResource(Resource):
     def get(self, token):
         agro_response = AgroResponse()
         usuario = Usuario()
         resposta = None
-        try:
-            email = usuario.confirmacao_token(token)
-        except:
-            resposta = 'Link inválido ou expirado'
+        email = usuario.confirmacao_token(token)
         usuario = Usuario.query.filter_by(email=email).first()
+        if not email:
+            return agro_response.status_200('Link inválido ou expirado!')
 
         if usuario.confirmado:
-            resposta = 'Conta confirmada. Faça o login'
-        else:
+            return agro_response.status_200('Conta já confirmada. Faça o login!')
+
+        if usuario.email == email:
             usuario.confirmado = True
             db.session.add(usuario)
             db.session.commit()
