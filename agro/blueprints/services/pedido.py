@@ -17,7 +17,7 @@ class PedidoService():
         payment = picpay.payment(
             reference_id=pedido.id,
             callback_url="https://picpay.com/site",
-            return_url="http://www.sualoja.com.br/cliente/pedido/102030",
+            return_url="http://localhost:3000/pagamentoConfirmado",
             value=dados["preco_total"],
             expires_at=expiraca_em,
             buyer={
