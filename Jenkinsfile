@@ -27,7 +27,7 @@ pipeline{
             echo "========always========"
         }
         success{
-            dynamic.call()
+            call()
             echo "========pipeline executed successfully ========"
         }
         failure{
