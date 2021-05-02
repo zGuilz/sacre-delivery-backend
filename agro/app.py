@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 
 from agro.ext import configuration
 
 def minimal_app(**config):
     app = Flask(__name__)
+    CORS(app)
     configuration.init_app(app, **config)
     return app
 

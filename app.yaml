@@ -1,0 +1,10 @@
+runtime: python39
+entrypoint: gunicorn main:app
+
+
+env_variables:
+  FLASK_APP: agro.app:create_app
+
+  PICPAY_TOKEN: "7d4064c6-af11-473c-b032-d8af98e4811b"
+  SELLER_TOKEN: "d507167f-f5a4-4c4d-b31c-304c9228fc76"
+  FLASK_ENV: "development"

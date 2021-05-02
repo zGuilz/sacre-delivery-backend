@@ -4,41 +4,44 @@ from flask import request
 from flask_restplus import Resource
 from agro.utils.response import AgroResponse
 
-from agro.blueprints.services.agricultor import AgricultorService
+from agro.blueprints.services.item_venda import ItemVendaService
 
-class AgricultorResource(Resource):
+class ItemVendaResource(Resource):
     def get(self):
         agro_response = AgroResponse()
-        agricultor = AgricultorService()
+        item_venda = ItemVendaService()
 
-        retorno = agricultor.listar()
+        retorno = item_venda.listar()
         if retorno:
             return agro_response.status_200(retorno)
         return agro_response.status_400('deu', 'ruim')
     
-    def put(self, id):
+    def post(self):
         agro_response = AgroResponse()
-        agricultor = AgricultorService()
+        item_venda = ItemVendaService()
         dados = json.loads(request.data)
 
-        retorno = agricultor.atualizar(id, dados)
+        retorno = item_venda.criar(dados)
         if retorno:
-            return agro_response.status_200(retorno)
+            return agro_response.status_200('Item venda criado')
+        return agro_response.status_400('deu', 'ruim')
     
     def delete(self, id):
         agro_response = AgroResponse()
-        agricultor = AgricultorService()
+        item_venda = ItemVendaService()
 
-        retorno = agricultor.deletar(id)
+        retorno = item_venda.deletar(id)
         if retorno:
             return agro_response.status_200(retorno)
-
-    def post(self):
-        agro_response = AgroResponse()
-        agricultor = AgricultorService()
-        dados = json.loads(request.data)
-
-        retorno = agricultor.criar(dados)
-        if retorno:
-            return agro_response.status_200('Um e-mail de confirmação foi enviado pra você')
         return agro_response.status_400('deu', 'ruim')
+    
+    def put(self):
+        agro_response = AgroResponse()
+        item_venda = ItemVendaService()
+        dados = json.loads(request.data)
+        retorno = item_venda.atualizar(dados)
+    
+        if retorno:
+            return agro_response.status_200(retorno)
+        return agro_response.status_400('deu', 'ruim')
+        
