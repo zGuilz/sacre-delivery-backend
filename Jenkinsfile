@@ -8,7 +8,7 @@ pipeline{
                 git url: "https://github.com/zGuilz/agro_plus-backend",
                     branch: 'main'
                 sh "ls"
-                sh "gcloud -h"
+                sh "gcloud app deploy"
             }
             post{
                 success{
