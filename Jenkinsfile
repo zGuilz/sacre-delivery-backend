@@ -10,7 +10,7 @@ pipeline{
                 sh "ls"
                 
                 sh "curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-338.0.0-linux-x86_64.tar.gz"
-                sh "./google-cloud-sdk/install.sh"
+                //sh "./google-cloud-sdk/install.sh"
                 sh "./google-cloud-sdk/bin/gcloud init"
             } 
         }
