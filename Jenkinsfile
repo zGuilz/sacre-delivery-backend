@@ -25,7 +25,6 @@ pipeline{
             echo "========always========"
         }
         success{
-            call()
             echo "========pipeline executed successfully ========"
         }
         failure{
