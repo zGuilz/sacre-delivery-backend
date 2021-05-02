@@ -9,6 +9,9 @@ pipeline{
                     branch: 'main'
                 
             }
+            steps{
+                echo "TEST"
+            }
             post{
                 success{
                     echo "Consegui efetuar o deploy"
@@ -16,9 +19,6 @@ pipeline{
                 failure{
                     echo "========A execution failed========"
                 }
-            }
-            steps{
-                echo "TEST"
             }
         }
     }
