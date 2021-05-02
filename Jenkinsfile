@@ -1,5 +1,3 @@
-@Library('agro-mais-pipeline@master')_
-
 /*pipeline{
     agent {
         label 'master'
