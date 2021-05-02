@@ -1,4 +1,4 @@
-@Library('agro-mais-pipeline')_
+@Library('agro-mais-pipeline@master')_
 
 pipeline{
     agent{
