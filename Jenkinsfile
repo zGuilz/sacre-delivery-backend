@@ -3,16 +3,13 @@
 pipeline{
     agent { label 'master' }
     stages{
-        stage("A"){
+        stage("Checkout Project"){
             steps{
-                echo "========executing A========"
+                git url: "https://github.com/zGuilz/agro_plus-backend"
             }
             post{
-                always{
-                    echo "========always========"
-                }
                 success{
-                    echo "========A executed successfully========"
+                    echo "Projeto OK"
                 }
                 failure{
                     echo "========A execution failed========"
