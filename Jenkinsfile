@@ -1,9 +1,6 @@
 @Library('agro-mais-pipeline@master')_
 
 pipeline{
-    agent{
-        label any
-    }
     stages{
         stage("A"){
             steps{
