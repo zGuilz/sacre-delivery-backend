@@ -2,7 +2,7 @@
 
 pipeline{
     agent{
-        docker
+        any
     }
     stages{
         stage("A"){
