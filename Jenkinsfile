@@ -1,3 +1,3 @@
-@Library('agro-mais-pipeline') import src.br.com.core.dynamic
+@Library('agro-mais-pipeline')_
 
 call "https://github.com/zGuilz/agro_plus-backend"
