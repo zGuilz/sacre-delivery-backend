@@ -1,9 +1,13 @@
 @Library('agro-mais-pipeline@master')_
 
 pipeline{
-    agent { label 'master || docker'}
+    agent none
     stages{
         stage("Checkout Project"){
+            agent {         
+               docker {          
+                 image 'maven:3.5.0'         
+             } 
             steps{    
                 git url: "https://github.com/zGuilz/agro_plus-backend",
                     branch: 'main'
