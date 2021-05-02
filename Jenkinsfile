@@ -1,7 +1,7 @@
 @Library('agro-mais-pipeline@master')_
 
 pipeline{
-    agent { label 'master || dockerfile'}
+    agent { label 'master || docker'}
     stages{
         stage("Checkout Project"){
             steps{    
@@ -9,9 +9,11 @@ pipeline{
                     branch: 'main'
                 sh "ls"
                 
+                sh "docker pull google/cloud-sdk:latest"
+                sh "docker run -ti --name gcloud-config google/cloud-sdk gcloud auth login"
           
                 //sh "./google-cloud-sdk/install.sh"
-                sh "./google-cloud-sdk/bin/gcloud init"
+                //sh "./google-cloud-sdk/bin/gcloud init"
             } 
         }
     }
