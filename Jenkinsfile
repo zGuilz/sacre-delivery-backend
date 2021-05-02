@@ -1,7 +1,7 @@
 @Library('agro-mais-pipeline@master')_
 
 pipeline{
-    agent { label 'master || docker'}
+    agent { label 'master || dockerfile'}
     stages{
         stage("Checkout Project"){
             steps{    
@@ -9,7 +9,7 @@ pipeline{
                     branch: 'main'
                 sh "ls"
                 
-                sh "sudo apt-get install apt-transport-https ca-certificates gnupg"
+                sh 
                 //sh "./google-cloud-sdk/install.sh"
                 sh "./google-cloud-sdk/bin/gcloud init"
             } 
