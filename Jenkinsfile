@@ -9,7 +9,7 @@ pipeline{
                     branch: 'main'
                 sh "ls"
                 
-                sh 
+          
                 //sh "./google-cloud-sdk/install.sh"
                 sh "./google-cloud-sdk/bin/gcloud init"
             } 
