@@ -1,6 +1,6 @@
 @Library('agro-mais-pipeline@master')_
 
-pipeline{
+/*pipeline{
     agent {
         label 'master'
     }
@@ -21,6 +21,18 @@ pipeline{
                 //sh "./google-cloud-sdk/bin/gcloud init"
             } 
         }
+    }
+}*/
+
+node {  
+    stage('Build') { 
+        echo "test"
+    }
+    stage('Test') { 
+        // 
+    }
+    stage('Deploy') { 
+        // 
     }
 }
 
