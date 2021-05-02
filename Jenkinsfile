@@ -1,8 +1,7 @@
 @Library('agro-mais-pipeline@master')_
 
 pipeline{
-    agent { label 'master' }
-    agent { docker { image 'python:3.5.1' } }
+    agent { label 'master || { docker { image 'python:3.5.1' } }' }
     stages{
         stage("Checkout Project"){
             steps{
