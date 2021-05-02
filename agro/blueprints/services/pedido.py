@@ -12,7 +12,7 @@ class PedidoService():
         db.session.add(pedido)
         db.session.flush()
 
-        expiraca_em = (pedido.data.replace(microsecond=0) + timedelta(minutes=1)).isoformat() + "-03:00"
+        expiraca_em = (pedido.data.replace(microsecond=0) + timedelta(minutes=10)).isoformat() + "-03:00"
 
         payment = picpay.payment(
             reference_id=pedido.id,
