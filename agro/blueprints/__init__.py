@@ -15,6 +15,7 @@ from agro.blueprints.resources.item_venda import ItemVendaResource
 from agro.blueprints.resources.categoria import CategoriaResource
 from agro.blueprints.resources.produto import ProdutoResource
 from agro.blueprints.resources.confirmacao import ConfirmacaoResource
+from agro.blueprints.resources.nutricao import NutricaoResource
 from agro.utils.response import AgroResponse
 
 BASE_PATH = '/api'
@@ -58,6 +59,8 @@ def init_app(app):
     api.add_resource(ConfirmacaoResource, f'{BASE_PATH}/confirmar/<string:token>', methods=['GET'])
 
     api.add_resource(LoginResource, f'{BASE_PATH}/login', methods=['POST'])
+
+    api.add_resource(NutricaoResource, f'{BASE_PATH}/alimento/<string:alimento>', methods=['GET'])
 
     @api.errorhandler(NotFound)
     def page_not_found_error(error):

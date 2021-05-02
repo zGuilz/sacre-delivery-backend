@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class PicPay(object):
+class PicPay:
 
     _URL = "https://appws.picpay.com/ecommerce/public/"
 
