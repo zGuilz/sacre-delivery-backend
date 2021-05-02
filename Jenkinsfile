@@ -4,7 +4,7 @@ pipeline{
     agent none
     stages{
         stage("Checkout Project"){
-            agent { docker { image 'python:3.5.1' } }
+            agent { dockerfile }
                steps{
                 
                 git url: "https://github.com/zGuilz/agro_plus-backend",
