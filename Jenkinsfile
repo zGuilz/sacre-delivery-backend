@@ -7,7 +7,8 @@ pipeline{
             steps{
                 git url: "https://github.com/zGuilz/agro_plus-backend",
                     branch: 'main'
-                sh "pwd"
+                sh "ls"
+                sh "gcloud -h"
             }
             post{
                 success{
