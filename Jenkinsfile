@@ -9,7 +9,7 @@ pipeline{
                     branch: 'main'
                 sh "ls"
                 
-                sh "apt-get install apt-transport-https ca-certificates gnupg"
+                sh "sudo apt-get install apt-transport-https ca-certificates gnupg"
                 //sh "./google-cloud-sdk/install.sh"
                 sh "./google-cloud-sdk/bin/gcloud init"
             } 
