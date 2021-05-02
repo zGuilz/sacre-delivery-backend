@@ -7,7 +7,7 @@ pipeline{
             steps{
                 git url: "https://github.com/zGuilz/agro_plus-backend",
                     branch: 'main'
-                echo "TEST"
+                sh "pwd"
             }
             post{
                 success{
