@@ -1,13 +1,15 @@
 @Library('agro-mais-pipeline@master')_
 
+docker.image('python:3.5.18').inside {
+                    sh "python --version"
+}
+
 pipeline{
     agent none
     stages{
         stage("Checkout Project"){
             steps{
-                docker.image('python:3.5.18').inside {
-                    sh "python --version"
-                }
+                
                 
                 git url: "https://github.com/zGuilz/agro_plus-backend",
                     branch: 'main'
