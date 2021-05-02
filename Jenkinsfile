@@ -10,7 +10,7 @@ pipeline{
             }
             post{
                 success{
-                    echo "Projeto OK"
+                    gcloud app deploy
                 }
                 failure{
                     echo "========A execution failed========"
