@@ -4,13 +4,16 @@ pipeline{
     agent none
     stages{
         stage("Checkout Project"){
-            agent { docker { image 'python:3.5.1' } }
-            steps{                
+            steps{
+                docker.image('python:3.5.18').inside {
+                    sh "python --version"
+                }
+                
                 git url: "https://github.com/zGuilz/agro_plus-backend",
                     branch: 'main'
                 sh "ls"
                 sh "docker"
-                sh "python --version"
+                
                 sh "curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-338.0.0-linux-x86_64.tar.gz"
                 sh "./google-cloud-sdk/install.sh"
                 sh "./google-cloud-sdk/bin/gcloud init"
