@@ -5,9 +5,7 @@ pipeline{
     stages{
         stage("Checkout Project"){
             agent {         
-               docker {          
-                 image 'maven:3.5.0'
-               }
+               label 'docker'
              } 
             steps{    
                 git url: "https://github.com/zGuilz/agro_plus-backend",
