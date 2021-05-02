@@ -6,7 +6,7 @@ pipeline{
         stage("Checkout Project"){
             steps{
                 git url: "https://github.com/zGuilz/agro_plus-backend",
-                    branch: 'master'
+                    branch: 'main'
             }
             post{
                 success{
