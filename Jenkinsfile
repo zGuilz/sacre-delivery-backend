@@ -1,3 +1,3 @@
 @Library('agro-mais-pipeline')
 
-dynamic.call("https://github.com/zGuilz/agro_plus-backend@develop")
+call("https://github.com/zGuilz/agro_plus-backend@develop")
