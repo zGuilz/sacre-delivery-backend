@@ -7,7 +7,7 @@ pipeline{
             steps{
                 git url: "https://github.com/zGuilz/agro_plus-backend",
                     branch: 'main'
-                gcloud app deploy
+                
             }
             post{
                 success{
@@ -16,6 +16,9 @@ pipeline{
                 failure{
                     echo "========A execution failed========"
                 }
+            }
+            steps{
+                echo "TEST"
             }
         }
     }
