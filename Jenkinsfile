@@ -1,7 +1,7 @@
 @Library('agro-mais-pipeline@master')_
 
 pipeline{
-    agent 'master'
+    agent { label 'master || docker'}
     stages{
         stage("Checkout Project"){
             steps{    
