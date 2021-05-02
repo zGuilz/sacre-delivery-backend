@@ -1,3 +1,5 @@
 @Library('agro-mais-pipeline@master')_
 
-call
+dynamic {
+  call()
+}
