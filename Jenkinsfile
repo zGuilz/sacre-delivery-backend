@@ -1,4 +1,4 @@
-/*pipeline{
+pipeline{
     agent {
         label 'master'
     }
@@ -20,23 +20,8 @@
             } 
         }
     }
-}*/
-
-node {
-     docker {
-            image 'node:lts-buster-slim' 
-            args '-p 3000:3000' 
-        }
-    stage('Build') { 
-        sh "docker"
-    }
-    stage('Test') { 
-        // 
-    }
-    stage('Deploy') { 
-        // 
-    }
 }
+
 
 
 
