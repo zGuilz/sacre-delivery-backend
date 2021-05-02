@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage("Checkout Project"){
             agent{
-                label 'docker'
+                docker
             }
             steps{
                 
